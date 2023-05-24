@@ -37,7 +37,7 @@ const Header = () => {
             underline={"always"}
             letterSpacing={".3rem"}
           >
-            {"aboutMe"}
+            {"About"}
           </NavLink>
         </Grid>
         <Grid item xs={"auto"}>
@@ -48,7 +48,7 @@ const Header = () => {
             underline={"always"}
             letterSpacing={".3rem"}
           >
-            {"projects"}
+            {"Projects"}
           </NavLink>
         </Grid>
         <Grid item xs={"auto"}>
@@ -59,7 +59,7 @@ const Header = () => {
             underline={"always"}
             letterSpacing={".3rem"}
           >
-            {"contact"}
+            {"Contact"}
           </NavLink>
         </Grid>
         <Grid item xs={"auto"}>
@@ -70,7 +70,7 @@ const Header = () => {
             underline={"always"}
             letterSpacing={".3rem"}
           >
-            {"resume"}
+            {"Resume"}
           </NavLink>
         </Grid>
       </Grid>

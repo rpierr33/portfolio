@@ -1,113 +1,91 @@
-import {
-  Button,
-  FormControl,
-  Grid,
-  FormHelperText,
-  TextField,
-  Typography,
-  Link,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import styled from "styled-components";
 
-import { useState } from "react";
+const Contact2 = () => {
+  const form = useRef();
 
-const CustomTextField = styled((props) => <TextField {...props} />)(() => ({
-  "& .MuiFilledInput-root": {
-    borderBottom: "1px solid #ebedef",
-    overflow: "hidden",
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    background: "rgba(235, 237, 239, 0.1)",
-  },
-  "& .MuiInputBase-input": {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 8,
-    paddingBottom: 8,
-  },
-}));
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-const Contact = () => {
-  // state for name-input
-  const [nameInput, setNameInput] = useState("");
-
-  // state for email-input
-  const [emailInput, setEmailInput] = useState("");
-
-  // state for msg-input
-  const [msgInput, setMsgInput] = useState("");
+    emailjs
+      .sendForm(
+        "service_oan4sgy",
+        "template_97ldlyp",
+        form.current,
+        "tz6eMT0hNWYzBEkzi"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          console.log("Message Sent!");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
 
   return (
-    <>
-      <Typography component={"h2"} variant={"h2"} gutterBottom>
-        Get in Touch!
-      </Typography>
-      <form id={"contact-form"} aria-label={"the form to send Ralph a message"}>
-        <Grid container spacing={3} alignItems={"center"} px={8}>
-          <Grid item xs={12} md={6} mx={0} mb={0}>
-            <FormControl fullWidth>
-              <CustomTextField
-                id="name-input"
-                variant="filled"
-                placeholder="Jane Doe"
-                required
-                onChange={(e) => {
-                  setNameInput(e.target.value);
-                }}
-              />
-              <FormHelperText align={"left"}>
-                First and Last Name
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={6} mx={0}>
-            <FormControl fullWidth>
-              <CustomTextField
-                id="email-input"
-                variant="filled"
-                placeholder="myname@email.com"
-                required
-                onChange={(e) => {
-                  setEmailInput(e.target.value);
-                }}
-              />
-              <FormHelperText align={"left"}>Email Address</FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl fullWidth>
-              <CustomTextField
-                id="msg-input"
-                variant="filled"
-                placeholder="This form is currently in development. If you'd like to get in touch, please use one of the options on the left. Thanks!"
-                multiline
-                minRows={5}
-                maxRows={8}
-                required
-                onChange={(e) => {
-                  setMsgInput(e.target.value);
-                }}
-              />
-              <FormHelperText align={"left"}>
-                Your Message to Ralph
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid container item xs={12} md={6} justifyContent={"flex-start"}>
-            <Button
-              variant="contained"
-              startIcon={<FontAwesomeIcon icon={faPaperPlane} size={"1x"} />}
-              size={"large"}
-            >
-              Send&nbsp;
-            </Button>
-          </Grid>
-        </Grid>
+    <StyledContactForm>
+      <form ref={form} onSubmit={sendEmail}>
+        <label>Name:</label>
+        <input type="text" name="user_name" />
+        <label>Email:</label>
+        <input type="email" name="user_email" />
+        <label>Message:</label>
+        <textarea name="message" />
+        <input type="submit" value="Send" />
       </form>
-    </>
+    </StyledContactForm>
   );
 };
+export default Contact2;
 
-export default Contact;
+// Styles
+const StyledContactForm = styled.div`
+  width: 600px;
+  margin: auto;
+  form {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    font-size: 16px;
+    input {
+      width: 100%;
+      height: 35px;
+      padding: 7px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid rgb(220, 220, 220);
+      &:focus {
+        border: 2px solid rgba(0, 206, 158, 1);
+      }
+    }
+    textarea {
+      max-width: 100%;
+      min-width: 100%;
+      width: 100%;
+      max-height: 100px;
+      min-height: 100px;
+      padding: 7px;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid rgb(220, 220, 220);
+      &:focus {
+        border: 2px solid rgba(0, 206, 158, 1);
+      }
+    }
+    label {
+      margin-top: 1rem;
+    }
+    input[type="submit"] {
+      margin-top: 2rem;
+      cursor: pointer;
+      background: rgba(235, 237, 239, 0.1);
+      color: white;
+      border: none;
+    }
+  }
+`;

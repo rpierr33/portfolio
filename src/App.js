@@ -121,30 +121,28 @@ const theme = createTheme({
 
 function App() {
     return (
-        <Box
-            padding='2'
-        >
-            <ThemeProvider theme={theme}>
-                <Router basename={process.env.PUBLIC_URL}>
-                    <CssBaseline />
-                    <Stack justifyContent={'space-between'} className='App'>
-                        <Header />
+      <Box padding="2">
+        <ThemeProvider theme={theme}>
+          <Router basename={process.env.PUBLIC_URL}>
+            <CssBaseline />
+            <Stack justifyContent={"space-between"} className="App">
+              <Header />
 
-                        <Container component={'main'} sx={{ py: 5 }} >
-                            <Routes>
-                                <Route path='/' element={<About />} />
-                                <Route path='/work' element={<Work />} />
-                                <Route path='/contact' element={<Contact />} />
-                                <Route path='/resume' element={<Resume />} />
-                            </Routes>
-                        </Container>
+              <Container component={"main"} sx={{ py: 5 }}>
+                <Routes>
+                  <Route path="/" element={<About />} />
+                  <Route path="/work" element={<Work />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/resume" element={<Resume />} />
+                </Routes>
+              </Container>
 
-                        <Footer />
-                    </Stack>
-                </Router>
-            </ThemeProvider>
-        </Box>
-        );
+              <Footer />
+            </Stack>
+          </Router>
+        </ThemeProvider>
+      </Box>
+    );
     }
     
     export default App;
